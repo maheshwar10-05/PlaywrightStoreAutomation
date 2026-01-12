@@ -6,14 +6,14 @@ class Login:
         self.page = page
 
     
-    def login(self,user_email,user_password):
+    def login(self,user_credentials2):
         header3 = self.page.locator("h4[class='heading4']").last.text_content().strip()
-        self.page.locator("#loginFrm_loginname").fill(user_email)
-        self.page.locator("#loginFrm_password").fill(user_password) 
-        screenshot_path=f"playwrightTesting/output/screenshots/test_login_page.png"
-        screenshot_path1=f"playwrightTesting/output/screenshots/test_login_page2.png"
-        self.page.screenshot(path=screenshot_path,full_page=True)
-        self.page.screenshot(path=screenshot_path1,full_page=True)
+        self.page.locator("#loginFrm_loginname").fill(user_credentials2["Login name"])
+        self.page.locator("#loginFrm_password").fill(user_credentials2["Password"]) 
+        # screenshot_path=f"playwrightTesting/output/screenshots/test_login_page.png"
+        # screenshot_path1=f"playwrightTesting/output/screenshots/test_login_page2.png"
+        # self.page.screenshot(path=screenshot_path,full_page=True)
+        # self.page.screenshot(path=screenshot_path1,full_page=True)
         self.page.get_by_role("button",name="Login").click()
         return header3
 

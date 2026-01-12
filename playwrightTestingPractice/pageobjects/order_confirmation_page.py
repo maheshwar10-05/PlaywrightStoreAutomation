@@ -1,4 +1,4 @@
-import re
+import re,time
 import pandas as pd
 class Orderpage:
     def __init__(self,page) -> None:
@@ -37,8 +37,6 @@ class Orderpage:
     def click_confirm_order(self):
 
         self.page.get_by_text("Confirm Order", exact=True).click()
-    
-
         order_success_page=self.page.locator("//span[@class='maintext']")
         order_success_page.wait_for(state="visible")
         success=order_success_page.text_content().strip()
@@ -59,10 +57,32 @@ class Orderpage:
              if x:
                 k=x.group()
                 print(k)
-        list1=[]
-        list1.append({'order_id':k})
-        df=pd.DataFrame(list1)
-        df.to_excel("test_results1.xlsx", index=False)
+             y=re.search(r'store owner',i)
+             if y:
+                 z=y.group()
+                 print(z)
+                 self.page.get_by_role("link", name="store owner").click()
+        time.sleep(3)
+        contact_page_text=self.page.locator(".maintext").text_content().strip()
+        
+        # Get the full raw text content
+        raw_content = self.page.locator("//div[@class='col-md-6 pull-left']").text_content()
+
+        # Split the text into lines, strip whitespace from each line, and filter out empty lines
+        cleaned_lines = [line.strip() for line in raw_content.splitlines() if line.strip()]
+
+        # Join them back with newlines or print individually
+        address_title = "\n".join(cleaned_lines)
+
+        print(address_title)
+
+        return contact_page_text
+    
+                 
+        # list1=[]
+        # list1.append({'order_id':k})
+        # df=pd.DataFrame(list1)
+        # df.to_excel("test_results1.xlsx", index=False)
 
         print("Data exported successfully!")
         

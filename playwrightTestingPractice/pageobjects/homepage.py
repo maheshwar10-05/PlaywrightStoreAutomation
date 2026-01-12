@@ -284,9 +284,52 @@ class Homepage:
     def click_checkout(self):
         self.page.locator("a").filter(has_text="Checkout").first.click()
     
-    def women_foot_wear(self):
+    def women_foot_wear_error(self):
         self.page.get_by_role("link", name="New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals").click()
+        time.sleep(3)
+        self.page.get_by_role("link", name="Add to Cart").click()
+        error_message=self.page.locator("div.alert.alert-error.alert-danger").text_content().strip()
+        print(error_message)
         
+        return error_message
+    def fill_all_fields_footwear(self):
+        elements=self.page.locator("//div[@class='col-md-6 text-center']//li/a")
+
+        for i in range(elements.count()):
+            elements.nth(i).click()
+            time.sleep(2)
+
+        self.page.get_by_role("radio", name="3 UK").click()
+        self.page.locator("#option345").select_option("red")
+        self.page.get_by_role("link", name="Add to wish list").click()
+        self.page.get_by_role("link", name="Reviews (0)").click()
+        self.page.locator("#rating4:visible").click()
+        self.page.locator("#name").fill("Reviewer")
+        self.page.locator("#text").fill("Good")
+        time.sleep(10)
+        self.page.get_by_role("button", name="Submit").click()
+
+    def profile_tab_links(self):
+        self.page.get_by_role("link", name="Welcome back tester123").hover()
+        tab_links=self.page.locator("//ul[@class='sub_menu dropdown-menu']/li/a")
+        tab_links.filter(has_text="Order History").click()
+        
+        time.sleep(3)
+
+    
+
+        
+
+    
+
+            
+
+
+
+
+
+    
+
             
             
             
