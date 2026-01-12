@@ -87,7 +87,8 @@ class Orderpage:
         print("Data exported successfully!")
         
     def func(self):
-        pass
+
+        assert True
 
         
     
