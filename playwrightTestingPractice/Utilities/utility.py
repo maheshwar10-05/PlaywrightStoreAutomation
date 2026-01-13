@@ -6,7 +6,7 @@ current_dir = os.path.dirname(__file__)
 
 # 2. Construct the path to the JSON file dynamically
 # This goes up one level from 'Utilities' then into 'Testdata'
-json_path = os.path.join(current_dir, "..", "Testdata", "registerdetails.json")
+json_path = os.path.join(current_dir, "..", "Testdata", "logindetails.json")
 
 # 3. Open the file using the dynamic path
 with open(json_path) as file:
