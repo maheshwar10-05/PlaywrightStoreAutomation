@@ -17,10 +17,10 @@ class Orderhistory:
         
         print(f"Expected value from Excel: {expected_products}")
         x=self.page.locator("b").filter(has_text="Order ID:").first.text_content().strip()
-        y=self.page.locator(":text('Order ID: #68564')").text_content().strip().split()
+        y=self.page.locator(":text('Order ID: #69033')").text_content().strip().split()
         id_string=""
         for word in y:
-            if word=="#68564":
+            if word=="#69033":
                 id_string=word
                 id_num=int(id_string.removeprefix("#"))
         for i,excel_val in enumerate(expected_products):
