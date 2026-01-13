@@ -89,6 +89,7 @@ class Orderpage:
     def func(self):
 
         assert False
+        assert True
 
         
     
