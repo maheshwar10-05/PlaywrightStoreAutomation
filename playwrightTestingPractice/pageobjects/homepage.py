@@ -1,5 +1,5 @@
 import time
-
+import re
 class Homepage:
     
 
@@ -281,8 +281,39 @@ class Homepage:
                     self.page.go_back()
                     
 
-    def click_checkout(self):
-        self.page.locator("a").filter(has_text="Checkout").first.click()
+    def checkout_click(self):
+        # header_ele=self.page.locator("//ul[@id='main_menu_top']/li/a")
+        # This resolves to ONLY the Checkout link, not all 4 links
+        # The ^ and $ symbols ensure the text matches "Checkout" exactly, with no extra characters
+        checkout_link = self.page.get_by_role("link", name="  Checkout",exact=True).first
+        checkout_link.click()
+
+        # for i in range(header_ele.count()):
+        #     x=header_ele.nth(i).text_content().strip()
+        #     print(x)
+
+    def header_special_link(self):
+        self.page.locator("//ul[@id='main_menu_top']/li/a").filter(has_text="Specials").click()
+        header=self.page.locator(".maintext").text_content().strip()
+        print(header)
+        return header
+    
+    def header_account_link(self):
+        self.page.locator("//ul[@id='main_menu_top']/li[@data-id='menu_account']").hover()
+        time.sleep(1)
+        self.page.locator("//li[@data-id='menu_account']/ul/li/a[@class='sub menu_logout']").first.click()
+        self.page.locator("//ul[@id='main_menu_top']/li[@data-id='menu_account']").hover()
+        self.page.locator("//li[@data-id='menu_account']/ul/li/a[@class='sub menu_order']").first.click()
+        time.sleep(3)
+
+
+
+          
+            
+                
+        
+        
+
     
     def women_foot_wear_error(self):
         self.page.get_by_role("link", name="New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals").click()

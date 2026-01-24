@@ -61,7 +61,10 @@ class Orderpage:
              if y:
                  z=y.group()
                  print(z)
+                 self.page.get_by_role("link", name="store owner").is_visible()
+                 
                  self.page.get_by_role("link", name="store owner").click()
+
         time.sleep(3)
         contact_page_text=self.page.locator(".maintext").text_content().strip()
         
@@ -85,13 +88,20 @@ class Orderpage:
         # df.to_excel("test_results1.xlsx", index=False)
 
         print("Data exported successfully!")
-        
-    def func(self):
 
-        assert False
-        assert True
+    def click_back(self):
+        self.page.locator("a").filter(has_text="Back").first.click()
+        header=self.page.locator("h1.heading1").text_content().strip()
+        time.sleep(3)
+        print(header)
+        return header
+    
+
+    
 
         
+
+    
     
 
                     

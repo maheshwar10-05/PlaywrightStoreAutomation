@@ -1,4 +1,5 @@
 from playwrightTestingPractice.Testdata.testdata_file import categories_list,currency_list
+import pytest
 
 def test_home_validation(common_steps):
     homepage_categories,count1=common_steps
@@ -72,6 +73,16 @@ def test_women_footwear(browserInstance,common_steps,login_fixture):
 def test_order_history(browserInstance,common_steps,login_fixture):
     homepage_categories,count1=login_fixture
     homepage_categories.profile_tab_links()
+
+def test_special_link(browserInstance,common_steps,login_fixture):
+    homepage_categories,count1=login_fixture
+    assert "Special" in homepage_categories.header_special_link()
+
+@pytest.mark.dependency(name='account_link',scope='session')
+def test_account_link(browserInstance,common_steps,login_fixture):
+    homepage_categories,count1=login_fixture
+    homepage_categories.header_account_link()
+
 
     
 
