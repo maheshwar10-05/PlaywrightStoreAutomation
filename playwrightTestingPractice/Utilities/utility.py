@@ -1,16 +1,33 @@
 import json
+import os
 
-with open("../Testdata/registerdetails.json") as file:
-    user_data = json.load(file)
-    userdetails = user_data["User_details_enter_create_account"]
-    print(userdetails)
+# 1. Get the directory where utility.py is located
+current_dir = os.path.dirname(__file__)
 
-with open("../Testdata/logindetails.json") as file1:
-    user_login=json.load(file1)
-    user_credentials = user_login["user_login_details"]
-    print(user_credentials)
+# 2. Construct the path to the JSON file dynamically
+# This goes up one level from 'Utilities' then into 'Testdata'
+json_path = os.path.join(current_dir, "..", "Testdata", "logindetails2.json")
+json_path1= os.path.join(current_dir, "..", "Testdata", "logindetails.json")
+json_path2= os.path.join(current_dir, "..", "Testdata", "registerdetails.json")
 
-with open("../Testdata/logindetails2.json") as file2:
-    user_login2=json.load(file2)
+# 3. Open the file using the dynamic path
+with open(json_path) as file:
+    # ... your existing code ...
+    user_login2=json.load(file)
     user_credentials2 = user_login2["user_details"]
     print(user_credentials2)
+
+with open(json_path2) as file:
+     user_data = json.load(file)
+     userdetails = user_data["User_details_enter_create_account"]
+     print(userdetails)
+
+with open(json_path1) as file1:
+     user_login=json.load(file1)
+     user_credentials = user_login["user_login_details"]
+     print(user_credentials)
+
+# with open("../Testdata/logindetails2.json") as file2:
+#     user_login2=json.load(file2)
+#     user_credentials2 = user_login2["user_details"]
+#     print(user_credentials2)
