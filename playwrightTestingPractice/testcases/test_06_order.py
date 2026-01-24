@@ -1,8 +1,6 @@
 import time,pytest
 from playwrightTestingPractice.Utilities.utility import user_credentials,user_login
-
-from playwrightTestingPractice.pageobjects.homepage import Homepage
-from playwrightTestingPractice.pageobjects.checkout_information_order_confirmation_page import Orderpage
+from playwrightTestingPractice.pageobjects.order_confirmation_page import Orderpage
 from playwrightTestingPractice.pageobjects.shoppingcart import Shoppingcart
 from playwrightTestingPractice.pageobjects.orderhistory import Orderhistory
 from playwrightTestingPractice.pageobjects.logout_orderdetails_entry import EnterOrder

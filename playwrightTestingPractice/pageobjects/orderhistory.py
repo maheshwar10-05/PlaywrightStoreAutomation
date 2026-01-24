@@ -9,7 +9,7 @@ class Orderhistory:
 
     def validate_excel_data(self):
     # 1. Read data from Excel
-        path = "C:/Users/2148389/PycharmProjects/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
+        path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
         workbook = openpyxl.load_workbook(path)
         sheet = workbook.active
         # Assuming cell A2 contains the expected product name
@@ -17,10 +17,10 @@ class Orderhistory:
         
         print(f"Expected value from Excel: {expected_products}")
         x=self.page.locator("b").filter(has_text="Order ID:").first.text_content().strip()
-        y=self.page.locator(":text('Order ID: #68564')").text_content().strip().split()
+        y=self.page.locator(":text('Order ID: #69033')").text_content().strip().split()
         id_string=""
         for word in y:
-            if word=="#68564":
+            if word=="#69033":
                 id_string=word
                 id_num=int(id_string.removeprefix("#"))
         for i,excel_val in enumerate(expected_products):
@@ -33,7 +33,7 @@ class Orderhistory:
     
     def excel_products_quantity_view(self):
          products_quan=self.page.locator("//tbody/tr[2]/td[1]")
-         path = "C:/Users/2148389/PycharmProjects/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1 (version 1).xlsb.xlsx"
+         path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
          workbook = openpyxl.load_workbook(path)
          sheet = workbook.active
         # Assuming cell A2 contains the expected product name
@@ -57,7 +57,7 @@ class Orderhistory:
 
 
     def export_total_excel(self):
-        path = "C:/Users/2148389/PycharmProjects/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
+        path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
         df = pd.read_excel(path)
         
         # Target ONLY the price elements in the table
@@ -96,7 +96,7 @@ class Orderhistory:
 
 
     def date_export_excel(self):
-        path = "C:/Users/2148389/PycharmProjects/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
+        path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
         df = pd.read_excel(path)
         number_excel_rows=len(df)
         date_info=self.page.locator("//div[@class='content']//table//td[contains(text(), 'Date Added:')]")
@@ -125,7 +125,7 @@ class Orderhistory:
           print("Close the Excel file and try again!")
 
     def status_excel(self):
-        path = "C:/Users/2148389/PycharmProjects/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
+        path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
         df = pd.read_excel(path)
         number_excel_rows=len(df)
         status_info=self.page.locator("//div[@class='container-fluid mt20']/div[2]")
