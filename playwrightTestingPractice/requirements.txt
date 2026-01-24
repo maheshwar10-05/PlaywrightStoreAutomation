@@ -1,0 +1,12 @@
+# Core Playwright library
+playwright==1.49.1
+
+# Test runner and Playwright plugin
+pytest==8.3.4
+pytest-playwright==0.6.2
+
+# Optional: For beautiful HTML reports
+pytest-html==4.1.1
+pandas
+
+openpyxl
