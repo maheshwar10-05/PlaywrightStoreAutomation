@@ -13,3 +13,6 @@ def test_special_products(browserInstance,common_steps,login_fixture):
     homepage_categories.header_special_link()
     special_prod=SpecialProducts(browserInstance)
     special_prod.products_special()
+    
+def test_assert():
+    assert True
