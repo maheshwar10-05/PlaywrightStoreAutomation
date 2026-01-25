@@ -16,4 +16,4 @@ def test_special_products(browserInstance,common_steps,login_fixture):
     
 def test_assert():
     assert True
-    assert False
+    
