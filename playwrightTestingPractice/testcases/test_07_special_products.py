@@ -13,7 +13,11 @@ def test_special_products(browserInstance,common_steps,login_fixture):
     homepage_categories.header_special_link()
     special_prod=SpecialProducts(browserInstance)
     special_prod.products_special()
-    
-def test_assert():
-    assert True
+
+def test_click_absolue_eye(browserInstance,common_steps,login_fixture):
+    homepage_categories,count1=login_fixture
+
+    homepage_categories.header_special_link()
+    special_prod=SpecialProducts(browserInstance)
+    assert "Absolue Eye" in special_prod.click_absolue_eye()
     

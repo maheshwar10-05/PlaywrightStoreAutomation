@@ -12,4 +12,9 @@ class SpecialProducts:
             individual_product=products.nth(i).text_content().strip()
             list_special.append(individual_product)
         print(list_special)
+        
+    def click_absolue_eye(self):
+        self.page.get_by_title("Absolue Eye Precious Cells").click()
+        header_page=self.page.locator(".bgnone").text_content().strip()
+        return header_page
 
