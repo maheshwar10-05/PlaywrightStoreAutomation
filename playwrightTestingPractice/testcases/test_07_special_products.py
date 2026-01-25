@@ -21,3 +21,12 @@ def test_click_absolue_eye(browserInstance,common_steps,login_fixture):
     special_prod=SpecialProducts(browserInstance)
     assert "Absolue Eye" in special_prod.click_absolue_eye()
     
+def test_input_quantity_special(browserInstance,common_steps,login_fixture):
+    test_click_absolue_eye(browserInstance,common_steps,login_fixture)
+    special_prod=SpecialProducts(browserInstance)
+    
+    total_price,single_price,updated_quantity=special_prod.input_quantity_special()
+    assert total_price==single_price*int(updated_quantity)
+    
+    
+    
