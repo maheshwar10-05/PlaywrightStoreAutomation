@@ -1,6 +1,6 @@
 import time
 from playwrightTestingPractice.pageobjects.shoppingcart import Shoppingcart
-from playwrightTestingPractice.pageobjects.order_confirmation_page import Orderpage
+from playwrightTestingPractice.pageobjects.checkout_information_order_confirmation_page import Orderpage
 # from playwrightTestingPractice.Utilities.utility import user_credentials
 # from playwrightTestingPractice.pageobjects.login import Login
 
