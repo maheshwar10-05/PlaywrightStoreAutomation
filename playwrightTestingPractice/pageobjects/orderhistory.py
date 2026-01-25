@@ -33,7 +33,7 @@ class Orderhistory:
     
     def excel_products_quantity_view(self):
          products_quan=self.page.locator("//tbody/tr[2]/td[1]")
-         path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
+         path = "C:/Users/86885/Testing/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
          workbook = openpyxl.load_workbook(path)
          sheet = workbook.active
         # Assuming cell A2 contains the expected product name
@@ -57,7 +57,7 @@ class Orderhistory:
 
 
     def export_total_excel(self):
-        path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
+        path = "C:/Users/86885/Testing/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
         df = pd.read_excel(path)
         
         # Target ONLY the price elements in the table
@@ -96,7 +96,7 @@ class Orderhistory:
 
 
     def date_export_excel(self):
-        path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
+        path = "C:/Users/86885/Testing/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
         df = pd.read_excel(path)
         number_excel_rows=len(df)
         date_info=self.page.locator("//div[@class='content']//table//td[contains(text(), 'Date Added:')]")
@@ -125,7 +125,7 @@ class Orderhistory:
           print("Close the Excel file and try again!")
 
     def status_excel(self):
-        path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
+        path = "C:/Users/86885/Testing/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
         df = pd.read_excel(path)
         number_excel_rows=len(df)
         status_info=self.page.locator("//div[@class='container-fluid mt20']/div[2]")
