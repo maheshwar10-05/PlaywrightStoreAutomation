@@ -36,6 +36,16 @@ def test_click_Replenishing_LipColour(browserInstance,common_steps,login_fixture
     special_prod=SpecialProducts(browserInstance)
     assert "Replenishing" in special_prod.click_replenishing_lipcolor()
     
+def test_click_creme_nuit(browserInstance,common_steps,login_fixture):
+    homepage_categories,count1=login_fixture
+
+    homepage_categories.header_special_link()
+    special_prod=SpecialProducts(browserInstance)
+    
+    assert "Creme" in special_prod.click_creme_nuit()
+    
+    
+    
     
     
 
