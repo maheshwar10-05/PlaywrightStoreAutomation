@@ -1,4 +1,4 @@
-class AbolueEye:
+class AbsolueEye:
     
     def __init__(self,page):
         self.page=page
@@ -33,3 +33,10 @@ class AbolueEye:
     def extract_model_number_absolue_eye(self):
         model_number=self.page.locator("//div[@class='tab-content']//li[1]").text_content().strip()
         print(model_number)
+        
+        
+    def click_lancome_brand(self):
+        self.page.locator("//ul[@class='productinfo']//li//a").click()
+        header1=self.page.locator("span.maintext").text_content().strip()
+        print(header1)
+        return header1
