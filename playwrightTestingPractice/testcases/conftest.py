@@ -46,7 +46,7 @@ def browserInstance(playwright: Playwright, request):
 
     # ... (Rest of your fixture logic)
     if browser_name == "chromium":
-        browser = playwright.chromium.launch(headless=True)
+        browser = playwright.chromium.launch(headless=False)
     elif browser_name == "firefox":
         browser = playwright.firefox.launch(headless=False)
     elif browser_name == "webkit":
