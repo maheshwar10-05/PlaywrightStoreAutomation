@@ -37,7 +37,7 @@ class SpecialProducts:
         print(f"the header of the page is {header_page}")
         return header_page
     def random_click():
-        assert True
+        assert False
         
     
     
