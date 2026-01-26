@@ -1,0 +1,16 @@
+import time,pytest
+from playwrightTestingPractice.Utilities.utility import user_credentials,user_login
+
+from playwrightTestingPractice.pageobjects.homepage import Homepage
+from playwrightTestingPractice.pageobjects.checkout_information_order_confirmation_page import Orderpage
+from playwrightTestingPractice.pageobjects.shoppingcart import Shoppingcart
+from playwrightTestingPractice.pageobjects.orderhistory import Orderhistory
+from playwrightTestingPractice.pageobjects.logout_orderdetails_entry import EnterOrder
+from playwrightTestingPractice.pageobjects.special_products import SpecialProducts
+from playwrightTestingPractice.testcases.test_07_special_products import test_click_Replenishing_LipColour
+
+
+def test_click_replinishing_lip(browserInstance,common_steps,login_fixture):
+    test_click_Replenishing_LipColour(browserInstance,common_steps,login_fixture)
+    special_prod=SpecialProducts(browserInstance)
+    

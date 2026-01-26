@@ -1,0 +1,35 @@
+class AbolueEye:
+    
+    def __init__(self,page):
+        self.page=page
+
+
+    def input_quantity_special_absolue_eye(self):
+        self.page.locator("#product_quantity").clear()
+        self.page.locator("#product_quantity").fill("3")
+        updated_quantity=self.page.locator("#product_quantity").input_value().strip()
+        print(f"The updated quantity is {updated_quantity}")
+        total_price=self.page.locator("label.control-label:visible").text_content().strip()
+        list_price=[]
+        list_price.append(total_price)
+        update_list_price=list_price[0].replace("\xa0\xa0\n\t\t\t\t\t\t\t\t\t\t\t","").strip().split("$")
+        update_list_price.pop(0)
+        int_price=float(update_list_price[0])
+        single_price=self.page.locator("div.productfilneprice").text_content().strip().split("$")
+        single_price.pop(0)
+        single_float_price=float(single_price[0])
+        print(f"The price of the products {int_price}")
+        print(f"The single price of the product {single_float_price}")
+        
+        return int_price,single_float_price,updated_quantity
+    
+    def click_add_cart_absolue_eye(self):
+        self.page.get_by_role("link", name="Add to Cart").click()
+        target_page=self.page.locator("span.maintext").text_content().strip()
+        print(target_page)
+        return target_page
+
+
+    def extract_model_number_absolue_eye(self):
+        model_number=self.page.locator("//div[@class='tab-content']//li[1]").text_content().strip()
+        print(model_number)
