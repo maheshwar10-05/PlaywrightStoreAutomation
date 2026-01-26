@@ -14,7 +14,7 @@ def test_input_quantity_special(browserInstance,common_steps,login_fixture):
     test_click_absolue_eye(browserInstance,common_steps,login_fixture)
     absolue_prod_eye=AbsolueEye(browserInstance)
     
-    single_price,total_price,updated_quantity=absolue_prod_eye.input_quantity_special_absolue_eye()
+    total_price,single_price,updated_quantity=absolue_prod_eye.input_quantity_special_absolue_eye()
     assert total_price==single_price*int(updated_quantity)
     
 def test_click_add_cart_absolue_eye(browserInstance,common_steps,login_fixture):
