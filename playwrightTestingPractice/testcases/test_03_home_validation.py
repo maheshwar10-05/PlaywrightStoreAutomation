@@ -1,8 +1,8 @@
 from playwrightTestingPractice.Testdata.testdata_file import categories_list,currency_list
 import pytest
 
-def test_home_validation(common_steps):
-    homepage_categories,count1=common_steps
+def test_home_validation(common_steps,login_fixture,browserInstance):
+    homepage_categories,count1=login_fixture
     headings_list=homepage_categories.homepage()
     cart_home_count=homepage_categories.product_from_heading_list_add_cart_home()
     assert headings_list==categories_list

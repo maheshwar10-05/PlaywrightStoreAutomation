@@ -1,7 +1,7 @@
 # conftest.py
 
 import pytest
-from playwright.sync_api import Playwright
+from playwright.async_api import Playwright
 import time
 from pytest_html import extras
 import os
@@ -60,7 +60,9 @@ def browserInstance(playwright: Playwright, request):
         # Should not happen if 'choices' is used correctly
         raise ValueError(f"Unsupported browser: {browser_name}")
 
-    context = browser.new_context()
+    context = browser.new_context(
+        capture_screenshot="Screenshots/" if "retain-on-failure" in request.config.getoption("--screenshot") else None
+    )
     page = context.new_page()
 
     yield page
