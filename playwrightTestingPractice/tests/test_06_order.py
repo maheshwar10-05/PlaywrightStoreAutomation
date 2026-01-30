@@ -1,10 +1,10 @@
 import time,pytest
-from playwrightTestingPractice.Utilities.utility import user_credentials,user_login
-from playwrightTestingPractice.pageobjects.checkout_information_order_confirmation_page import Orderpage
-from playwrightTestingPractice.pageobjects.shoppingcart import Shoppingcart
-from playwrightTestingPractice.pageobjects.orderhistory import Orderhistory
-from playwrightTestingPractice.pageobjects.logout_orderdetails_entry import EnterOrder
-from playwrightTestingPractice.testcases.test_03_home_validation import test_account_link
+from playwrightTestingPractice.utils.utility import user_credentials,user_login
+from playwrightTestingPractice.pages.checkout_information_order_confirmation_page import Orderpage
+from playwrightTestingPractice.pages.shoppingcart import Shoppingcart
+from playwrightTestingPractice.pages.orderhistory import Orderhistory
+from playwrightTestingPractice.pages.logout_orderdetails_entry import EnterOrder
+from playwrightTestingPractice.tests.test_03_home_validation import test_account_link
 
 def test_pop(browserInstance,common_steps,login_fixture):
 

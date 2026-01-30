@@ -1,8 +1,8 @@
 import pytest
-from playwrightTestingPractice.Utilities.utility import user_credentials,user_login
-from playwrightTestingPractice.pageobjects.login import Login
-from playwrightTestingPractice.Utilities.login_register_utility import LoginRegister
-from playwrightTestingPractice.pageobjects.homepage import Homepage
+from playwrightTestingPractice.utils.utility import user_credentials,user_login
+from playwrightTestingPractice.pages.login import Login
+from playwrightTestingPractice.utils.login_register_utility import LoginRegister
+from playwrightTestingPractice.pages.homepage import Homepage
 
 @pytest.mark.parametrize('user_login',user_credentials)
 def test_login(user_login,browserInstance):

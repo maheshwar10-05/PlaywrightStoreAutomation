@@ -1,9 +1,9 @@
 import json
 import time
 
-from playwrightTestingPractice.pageobjects.registerpageobjects import Register
-from playwrightTestingPractice.Utilities.utility import userdetails
-from playwrightTestingPractice.Utilities.login_register_utility import LoginRegister
+from playwrightTestingPractice.pages.registerpageobjects import Register
+from playwrightTestingPractice.utils.utility import userdetails
+from playwrightTestingPractice.utils.login_register_utility import LoginRegister
 
 
 

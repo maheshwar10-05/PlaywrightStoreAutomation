@@ -1,6 +1,6 @@
 
-from playwrightTestingPractice.pageobjects.subaccessory_product_page import Subaccessory
-from playwrightTestingPractice.pageobjects.specific_product_page import Specificproduct
+from playwrightTestingPractice.pages.subaccessory_product_page import Subaccessory
+from playwrightTestingPractice.pages.specific_product_page import Specificproduct
 
 
 def test_various_sub_products(browserInstance,common_steps):

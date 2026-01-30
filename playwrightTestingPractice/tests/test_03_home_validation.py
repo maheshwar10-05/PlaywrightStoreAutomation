@@ -1,4 +1,4 @@
-from playwrightTestingPractice.Testdata.testdata_file import categories_list,currency_list
+from playwrightTestingPractice.testdata.testdata_file import categories_list,currency_list
 import pytest
 
 def test_home_validation(common_steps,login_fixture,browserInstance):
