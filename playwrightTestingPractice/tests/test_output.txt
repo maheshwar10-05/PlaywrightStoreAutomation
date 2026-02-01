@@ -1,0 +1,37 @@
+C:\Users\86885\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+{'Login name': 'testuser36567', 'Password': 'Testuser@1234'}
+{'Firstname': 'tester123', 'Lastname': 'quality', 'Email': 'quality23@gmail.com', 'Address1': '84-7892,French colony', 'city': 'Kochi', 'Region': 'Kerala', 'zip code': '842392', 'country': 'India', 'Login name': 'testuser36567', 'Password': 'Testuser@1234', 'confirm password': 'Testuser@1234'}
+[{'Login name': 'qualityengineerrole1239', 'Password': 'Testuser@1234'}, {'Login name': 'testuser36567', 'Password': 'Testuser@1234'}]
+============================= test session starts =============================
+platform win32 -- Python 3.12.1, pytest-8.3.4, pluggy-1.5.0
+rootdir: c:\Users\86885\Testing\PlaywrightAutomationstore\playwrightTestingPractice
+configfile: pytest.ini
+plugins: allure-pytest-2.13.5, anyio-4.10.0, asyncio-1.3.0, base-url-2.1.0, html-4.1.1, metadata-3.1.1, playwright-0.6.2, xdist-3.6.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+Data exported successfully!
+collected 1 item
+
+test_06_order.py::test_click_back[chromium] 
+Total header links found: 4
+Link 0: Text='Specials', Href='https://automationteststore.com/index.php?rt=product/special'
+Link 1: Text='Account', Href='https://automationteststore.com/index.php?rt=account/account'
+Link 2: Text='Cart', Href='https://automationteststore.com/index.php?rt=checkout/cart'
+Link 3: Text='Checkout', Href='https://automationteststore.com/index.php?rt=checkout/shipping'
+
+Checkout found at index 3, clicking...
+Clicking checkout link with href: https://automationteststore.com/index.php?rt=checkout/shipping
+Navigation may have been redirected. Current URL: https://automationteststore.com/index.php?rt=checkout/confirm
+My Account
+	tester123
+PASSED
+
+============================== warnings summary ===============================
+test_03_home_validation.py:81
+  C:\Users\86885\Testing\PlaywrightAutomationstore\playwrightTestingPractice\tests\test_03_home_validation.py:81: PytestUnknownMarkWarning: Unknown pytest.mark.dependency - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.dependency(name='account_link',scope='session')
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 1 passed, 1 warning in 30.37s ========================

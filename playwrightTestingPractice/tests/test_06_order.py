@@ -28,18 +28,12 @@ def test_delivery_payment_information(browserInstance,common_steps,login_fixture
     assert pop_up.edit_cart()== " Shopping Cart"
     time.sleep(2)
 
-def test_order_confirmation(browserInstance,common_steps,login_fixture):
+def test_order_confirmation(browserInstance,click_login_register_button,login_fixture):
     pop_up=Orderpage(browserInstance)
-    
-    
     homepage_categories,count1=login_fixture
-    time.sleep(3)
     homepage_categories.checkout_click()
-    
-    pop_up.click_confirm_order()
-    
-    #assert "Order" in  confirm_order
-
+    assert 'Processed' in pop_up.click_confirm_order()
+    time.sleep(3)
 
     assert "Contact" in pop_up.order_id()
 
@@ -78,13 +72,15 @@ def test_status_info(browserInstance,common_steps,login_fixture):
     homepage_categories.profile_tab_links()
     orderobj.status_excel()
 
-def test_click_back(browserInstance,common_steps,login_fixture):
+def test_click_back(browserInstance,click_login_register_button,login_fixture):
     pop_up=Orderpage(browserInstance)
     homepage_categories,count1=login_fixture
+    # Add items to cart before checkout
+    homepage_categories.cart_link()
     homepage_categories.checkout_click()
     pop_up.click_back()
 
-@pytest.mark.dependency(depends=['account_link'],scope='session')
+# @pytest.mark.dependency(depends=['account_link'],scope='session')
 def test_logout_orderdetail(browserInstance,common_steps,login_fixture):
     test_account_link(browserInstance,common_steps,login_fixture)
     import_order=EnterOrder(browserInstance)

@@ -3,18 +3,12 @@ from playwrightTestingPractice.utils.utility import user_credentials,user_login
 from playwrightTestingPractice.pages.login import Login
 from playwrightTestingPractice.utils.login_register_utility import LoginRegister
 from playwrightTestingPractice.pages.homepage import Homepage
+from playwrightTestingPractice.testdata.testdata_file import incorrect_login_correct_password
 
-@pytest.mark.parametrize('user_login',user_credentials)
-def test_login(user_login,browserInstance):
-    logobject=Login(page=browserInstance)
-    user_email=user_login["Login name"]
-    user_password=user_login["Password"]
-    logregobj=LoginRegister(page=browserInstance)
-    logregobj.navigation()
-    logregobj.click_login_register_button()
-
-    assert logobject.login(user_email,user_password)=="I am a returning customer."
-    
+def test_incorrect_login_correct_password(browserInstance,click_login_register_button):
+    loginobj=Login(browserInstance)
+    error_message=loginobj.enter_incorrect_login_correct_password(incorrect_login_correct_password)
+    assert "Incorrect login or password provided" in error_message
 
     # logobject=Login(page=browserInstance)
     # logregobj=LoginRegister(page=browserInstance)

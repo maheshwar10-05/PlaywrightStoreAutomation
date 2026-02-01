@@ -8,7 +8,7 @@ from playwrightTestingPractice.pages.orderhistory import Orderhistory
 from playwrightTestingPractice.pages.logout_orderdetails_entry import EnterOrder
 from playwrightTestingPractice.pages.special_products import SpecialProducts
 
-def test_special_products(browserInstance,common_steps,login_fixture):
+def test_special_products(browserInstance,click_login_register_button,login_fixture):
     homepage_categories,count1=login_fixture
     homepage_categories.header_special_link()
     special_prod=SpecialProducts(browserInstance)

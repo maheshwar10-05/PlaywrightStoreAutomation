@@ -5,10 +5,10 @@ from playwright.async_api import Playwright
 import time
 from pytest_html import extras
 import os
-from playwrightTestingPractice.pageobjects.login import Login
-from playwrightTestingPractice.Utilities.utility import user_credentials2,user_login2
-from playwrightTestingPractice.Utilities.login_register_utility import LoginRegister
-from playwrightTestingPractice.pageobjects.homepage import Homepage
+from playwrightTestingPractice.pages.login import Login
+from playwrightTestingPractice.utils.utility import user_credentials2,user_login2
+from playwrightTestingPractice.utils.login_register_utility import LoginRegister
+from playwrightTestingPractice.pages.homepage import Homepage
 
 SUPPORTED_BROWSERS = ["chromium", "firefox", "webkit","edge"]
 
@@ -41,6 +41,7 @@ def pytest_generate_tests(metafunc):
 
 @pytest.fixture
 def browserInstance(playwright: Playwright, request):
+    base_url="https://automationteststore.com/"
     # This will now correctly receive the browser name from the parametrization
     browser_name = request.param
 
@@ -59,11 +60,10 @@ def browserInstance(playwright: Playwright, request):
     else:
         # Should not happen if 'choices' is used correctly
         raise ValueError(f"Unsupported browser: {browser_name}")
-
-    context = browser.new_context(
-        capture_screenshot="Screenshots/" if "retain-on-failure" in request.config.getoption("--screenshot") else None
-    )
+    context=browser.new_context()
     page = context.new_page()
+    page.goto(base_url)
+
 
     yield page
     
@@ -72,12 +72,9 @@ def browserInstance(playwright: Playwright, request):
 
 @pytest.fixture
 
-def common_steps(browserInstance):
-    logregobj=LoginRegister(page=browserInstance)
-    
-    logregobj.navigation()
-    logregobj.click_login_register_button()
-    
+def click_login_register_button(browserInstance):
+    page=browserInstance
+    page.get_by_role("link", name="Login or register").click()
 
 #@pytest.fixture(params=user_credentials)
 @pytest.fixture
