@@ -37,7 +37,8 @@ class Orderpage:
     def click_confirm_order(self):
 
         self.page.get_by_text("Confirm Order", exact=True).click()
-        order_success_page=self.page.locator("//span[@class='maintext']")
+        time.sleep(5)
+        order_success_page=self.page.locator(".maintext")
         order_success_page.wait_for(state="visible")
         success=order_success_page.text_content().strip()
         print(success)
@@ -45,49 +46,48 @@ class Orderpage:
         return success
     
     def order_id(self):
-        order_list=[]
-        symbols=['#']
-        web_el=self.page.locator("//section[@class='mb40']/p")
-        for i in range(web_el.count()):
-            a=web_el.nth(i).text_content().strip()
-            order_list.append(a)
-        print(order_list)
-        for i in order_list:
-             x=re.search(r'\d{5}',i)
-             if x:
-                k=x.group()
-                print(k)
-             y=re.search(r'store owner',i)
-             if y:
-                 z=y.group()
-                 print(z)
-                 self.page.get_by_role("link", name="store owner").is_visible()
-                 
-                 self.page.get_by_role("link", name="store owner").click()
+        # 1. Use a more robust locator for the success message container
+        # This waits for the section to actually exist in the DOM
+        container = self.page.locator("section.mb40")
+        container.wait_for(state="visible")
 
-        time.sleep(3)
-        contact_page_text=self.page.locator(".maintext").text_content().strip()
+        # 2. Extract all <p> tags inside that section
+        # We use .all() to get a list of locator objects we can iterate over
+        paragraphs = container.locator("p").all()
         
-        # Get the full raw text content
-        raw_content = self.page.locator("//div[@class='col-md-6 pull-left']").text_content()
+        # 3. Clean and append to a list
+        order_list = [p.text_content().strip() for p in paragraphs]
+        
+        # Debug print to verify the list is no longer empty
+        print(f"Extracted Lines: {order_list}")
 
-        # Split the text into lines, strip whitespace from each line, and filter out empty lines
-        cleaned_lines = [line.strip() for line in raw_content.splitlines() if line.strip()]
+        # 4. Logic to click 'store owner' if it exists in the list
+        for line in order_list:
+            if "#" in line.lower():
+                order_id=line.split('#')
+                clean_order_id=order_id[1].removesuffix(' has been created!')
+                print(clean_order_id)
+            if "store owner" in line.lower():
+                # Using the page-level locator to perform the click
+                self.page.get_by_text("store owner", exact=True).click()
+                break
+            
+        time.sleep(4)
 
-        # Join them back with newlines or print individually
-        address_title = "\n".join(cleaned_lines)
-
-        print(address_title)
-
-        return contact_page_text
-    
+        # 5. Wait for the new page and return the header text
+        contact_header = self.page.locator(".maintext")
+        contact_header.wait_for(state="visible")
+        print(contact_header.text_content().strip())
+        
+        return contact_header.text_content().strip()
+        
                  
         # list1=[]
         # list1.append({'order_id':k})
         # df=pd.DataFrame(list1)
         # df.to_excel("test_results1.xlsx", index=False)
 
-        print("Data exported successfully!")
+    print("Data exported successfully!")
 
     def click_back(self):
         self.page.locator("a").filter(has_text="Back").first.click()

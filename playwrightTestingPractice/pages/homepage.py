@@ -282,15 +282,59 @@ class Homepage:
                     
 
     def checkout_click(self):
-        # header_ele=self.page.locator("//ul[@id='main_menu_top']/li/a")
-        # This resolves to ONLY the Checkout link, not all 4 links
-        # The ^ and $ symbols ensure the text matches "Checkout" exactly, with no extra characters
-        checkout_link = self.page.get_by_role("link", name="  Checkout",exact=True).first
-        checkout_link.click()
-
-        # for i in range(header_ele.count()):
-        #     x=header_ele.nth(i).text_content().strip()
-        #     print(x)
+        try:
+            # Wait for the main menu to be visible
+            self.page.wait_for_selector("ul#main_menu_top", state="visible", timeout=10000)
+            
+            # Get all links in main menu and debug
+            header_links = self.page.locator("ul#main_menu_top > li > a")
+            count = header_links.count()
+            print(f"\nTotal header links found: {count}")
+            
+            # Print all available links with their positions
+            for i in range(count):
+                link_text = header_links.nth(i).text_content().strip()
+                href = header_links.nth(i).get_attribute("href")
+                print(f"Link {i}: Text='{link_text}', Href='{href}'")
+            
+            # Find checkout by iterating and matching exact text
+            checkout_index = -1
+            for i in range(count):
+                text = header_links.nth(i).text_content().strip()
+                if text == "Checkout":
+                    checkout_index = i
+                    break
+            
+            if checkout_index >= 0:
+                print(f"\nCheckout found at index {checkout_index}, clicking...")
+                checkout_link = header_links.nth(checkout_index)
+                checkout_link.wait_for(state="visible", timeout=10000)
+                
+                # Get the href to verify it's the right link
+                href = checkout_link.get_attribute("href")
+                print(f"Clicking checkout link with href: {href}")
+                
+                # Use JavaScript click to ensure it's clicked
+                checkout_link.evaluate("el => el.click()")
+                
+                # Wait for page to load
+                try:
+                    self.page.wait_for_url("**/checkout/**", timeout=10000)
+                    current_url = self.page.url
+                    print(f"Successfully navigated to: {current_url}")
+                except:
+                    current_url = self.page.url
+                    print(f"Navigation may have been redirected. Current URL: {current_url}")
+                    
+            else:
+                raise Exception(f"Checkout link not found. Available links: {count}")
+                
+        except Exception as e:
+            print(f"Error in checkout_click: {str(e)}")
+            raise
+            
+            
+            # self.page.go_back()
 
     def header_special_link(self):
         self.page.locator("//ul[@id='main_menu_top']/li/a").filter(has_text="Specials").click()
