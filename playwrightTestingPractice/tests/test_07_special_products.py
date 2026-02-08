@@ -14,14 +14,14 @@ def test_special_products(browserInstance,click_login_register_button,login_fixt
     special_prod=SpecialProducts(browserInstance)
     special_prod.products_special()
 
-def test_click_absolue_eye(browserInstance,common_steps,login_fixture):
+def test_click_absolue_eye(browserInstance,click_login_register_button,login_fixture):
     homepage_categories,count1=login_fixture
 
     homepage_categories.header_special_link()
     special_prod=SpecialProducts(browserInstance)
     assert "Absolue Eye" in special_prod.click_absolue_eye()
     
-def test_click_ck_one_Summer(browserInstance,common_steps,login_fixture):
+def test_click_ck_one_Summer(browserInstance,click_login_register_button,login_fixture):
     homepage_categories,count1=login_fixture
 
     homepage_categories.header_special_link()
@@ -29,14 +29,14 @@ def test_click_ck_one_Summer(browserInstance,common_steps,login_fixture):
     assert 'Summer' in special_prod.click_ck_one_summer()
     
     
-def test_click_Replenishing_LipColour(browserInstance,common_steps,login_fixture):
+def test_click_Replenishing_LipColour(browserInstance,click_login_register_button,login_fixture):
     homepage_categories,count1=login_fixture
 
     homepage_categories.header_special_link()
     special_prod=SpecialProducts(browserInstance)
     assert "Replenishing" in special_prod.click_replenishing_lipcolor()
     
-def test_click_creme_nuit(browserInstance,common_steps,login_fixture):
+def test_click_creme_nuit(browserInstance,click_login_register_button,login_fixture):
     homepage_categories,count1=login_fixture
 
     homepage_categories.header_special_link()
