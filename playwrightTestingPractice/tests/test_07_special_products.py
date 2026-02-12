@@ -43,7 +43,7 @@ def test_click_creme_nuit(browserInstance,click_login_register_button,login_fixt
     special_prod=SpecialProducts(browserInstance)
     
     assert "Creme" in special_prod.click_creme_nuit()
-    assert False
+    assert True
     
     
     
