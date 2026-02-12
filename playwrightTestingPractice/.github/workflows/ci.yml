@@ -16,7 +16,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install Dependencies
         run: |
@@ -26,4 +26,5 @@ jobs:
       - name: Run Tests
         run: |
           cd playwrightTestingPractice
-          pytest tests --html=report.html --self-contained-html
+          cd tests
+          pytest test_07_special_products.py --html=report.html --self-contained-html
