@@ -1,0 +1,15 @@
+INFO     root:test_09_forgot_login_name.py:17 None
+INFO     root:test_09_forgot_login_name.py:18 ×
+Success: Your login name reminder has been sent to your e-mail address.
+INFO     root:test_09_forgot_login_name.py:17 None
+INFO     root:test_09_forgot_login_name.py:18 ×
+Error: No records found matching information your provided, please check your information and try again!
+INFO     root:test_09_forgot_login_name.py:17 None
+INFO     root:test_09_forgot_login_name.py:18 ×
+Error: No records found matching information your provided, please check your information and try again!
+INFO     root:test_09_forgot_login_name.py:17 None
+INFO     root:test_09_forgot_login_name.py:18 ×
+Error: The Email address was not provided or not found in our records, please try again!
+INFO     root:test_09_forgot_login_name.py:17 None
+INFO     root:test_09_forgot_login_name.py:18 ×
+Error: The Last name was not provided or not found in our records, please try again!
