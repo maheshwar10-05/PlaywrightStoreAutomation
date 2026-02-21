@@ -27,10 +27,10 @@ jobs:
           pip install -r requirements.txt
           playwright install
 
-      # - name: Run Pytest
-      #   run: |
-      #     cd playwrightTestingPractice
-      #     cd tests
+      - name: Run Pytest
+        run: |
+          cd playwrightTestingPractice
+  
       #     pytest test_07_special_products.py
       - name: Login and create auth state
         run: |
