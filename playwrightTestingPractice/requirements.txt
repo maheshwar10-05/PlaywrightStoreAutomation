@@ -8,5 +8,15 @@ pytest-playwright==0.6.2
 # Optional: For beautiful HTML reports
 pytest-html==4.1.1
 pandas
+allure-pytest==2.15.0
+
+# Parallel execution
+pytest-xdist==3.8.0
+
+# Base URL support
+pytest-base-url==2.1.0
+
+# Metadata in reports
+pytest-metadata==3.1.1
 
 openpyxl
