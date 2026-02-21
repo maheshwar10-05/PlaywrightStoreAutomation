@@ -66,7 +66,7 @@ def browser(playwright: Playwright, browser_name):
 @pytest.fixture
 def browserInstance(browser, request):
 
-    AUTH_FILE = Path.cwd() / "auth.json"
+    AUTH_FILE = Path(__file__).resolve().parent.parent / "auth.json"
     context = browser.new_context(storage_state=str(AUTH_FILE))
     page = context.new_page()
     page.goto("https://automationteststore.com/")
