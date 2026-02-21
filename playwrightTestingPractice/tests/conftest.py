@@ -63,7 +63,7 @@ def browser(playwright: Playwright, browser_name):
 
 # -------------------------
 # PAGE FIXTURE (fail tests)
-# -------------------------
+@pytest.fixture(scope='session')
 def browserInstance(browser, request):
 
     AUTH_FILE = Path.cwd() / "auth.json"
