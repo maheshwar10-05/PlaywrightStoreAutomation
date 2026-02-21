@@ -8,8 +8,8 @@ from playwrightTestingPractice.testdata.testdata_file import Data
 list1=Data().data_login_details()
 
 @pytest.mark.parametrize('user_list1',list1)
-def test_excel_data(user_list1,browserInstance,click_login_register_button):
-    loginobj=Login(browserInstance)
+def test_excel_data(user_list1,browserInstance1,click_login_register_button):
+    loginobj=Login(browserInstance1)
     user_name=user_list1["user"]
     user_password=user_list1["pass"]
 

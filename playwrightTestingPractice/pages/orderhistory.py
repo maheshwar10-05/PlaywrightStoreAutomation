@@ -1,6 +1,6 @@
-import openpyxl,re
+import openpyxl,re,time
 import pandas as pd
-import time
+from pathlib import Path
 class Orderhistory:
 
 
@@ -9,8 +9,8 @@ class Orderhistory:
 
     def validate_excel_data(self):
     # 1. Read data from Excel
-        path = "C:/Users/rahul/Playwright/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
-        workbook = openpyxl.load_workbook(path)
+        EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+        workbook = openpyxl.load_workbook(EXCEL_PATH)
         sheet = workbook.active
         # Assuming cell A2 contains the expected product name
         expected_products = [cell.value for cell in sheet['A'] if cell.row > 1 and cell.value is not None]
@@ -33,8 +33,8 @@ class Orderhistory:
     
     def excel_products_quantity_view(self):
          products_quan=self.page.locator("//tbody/tr[2]/td[1]")
-         path = "C:/Users/86885/Testing/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
-         workbook = openpyxl.load_workbook(path)
+         EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+         workbook = openpyxl.load_workbook(EXCEL_PATH)
          sheet = workbook.active
         # Assuming cell A2 contains the expected product name
          expected_products = [cell.value for cell in sheet['B'] if cell.row > 1 and cell.value is not None]
@@ -57,8 +57,8 @@ class Orderhistory:
 
 
     def export_total_excel(self):
-        path = "C:/Users/86885/Testing/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
-        df = pd.read_excel(path)
+        EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+        df = pd.read_excel(EXCEL_PATH)
         
         # Target ONLY the price elements in the table
         total_price_locator = self.page.locator("//td[contains(text(), 'Total:')]")
@@ -79,7 +79,7 @@ class Orderhistory:
                 print(f"Updating Row {i+2} with {clean_price}")
 
         try:
-            df.to_excel(path, index=False)
+            df.to_excel(EXCEL_PATH, index=False)
             print("Excel updated successfully without extra repeated rows.")
         except PermissionError:
             print("Error: Close the Excel file before running!")
@@ -96,8 +96,9 @@ class Orderhistory:
 
 
     def date_export_excel(self):
-        path = "C:/Users/86885/Testing/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
-        df = pd.read_excel(path)
+        EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+        workbook = openpyxl.load_workbook(EXCEL_PATH)
+        df = pd.read_excel(EXCEL_PATH)
         number_excel_rows=len(df)
         date_info=self.page.locator("//div[@class='content']//table//td[contains(text(), 'Date Added:')]")
         for i in range(date_info.count()):
@@ -119,14 +120,15 @@ class Orderhistory:
             print(f"Row {i} updated with: {clean_date}")
 
         try:
-          df.to_excel(path, index=False)
+          df.to_excel(EXCEL_PATH, index=False)
           print("Excel updated successfully with all individual prices.")
         except PermissionError:
           print("Close the Excel file and try again!")
 
     def status_excel(self):
-        path = "C:/Users/86885/Testing/PlaywrightStoreAutomation/playwrightTestingPractice/testcases/test_results1.xlsx"
-        df = pd.read_excel(path)
+        EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+        workbook = openpyxl.load_workbook(EXCEL_PATH)
+        df = pd.read_excel(EXCEL_PATH)
         number_excel_rows=len(df)
         status_info=self.page.locator("//div[@class='container-fluid mt20']/div[2]")
         for i in range(status_info.count()):
@@ -148,7 +150,7 @@ class Orderhistory:
             print(f"Row {i} updated with: {clean_status}")
 
         try:
-          df.to_excel(path, index=False)
+          df.to_excel(EXCEL_PATH, index=False)
           print("Excel updated successfully with all individual prices.")
         except PermissionError:
           print("Close the Excel file and try again!")

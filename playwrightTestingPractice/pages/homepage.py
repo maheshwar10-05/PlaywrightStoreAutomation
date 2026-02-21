@@ -146,13 +146,13 @@ class Homepage:
         active_selected=self.page.locator("//li/a[@id='category_selected']").text_content()
         
         print(active_selected)
-        screenshot_path=f"playwrightTesting/output/screenshots/test_search_keyword.png"
+        screenshot_path=f"reports/screenshots/test_search_keyword.png"
         self.page.screenshot(path=screenshot_path,full_page=True)
         return active_selected
     def search_page(self):
         self.page.get_by_title("Go").click()
         title=self.page.locator(".maintext").text_content()
-        screenshot_path=f"playwrightTesting/output/screenshots/test_search_page.png"
+        screenshot_path=f"reports/screenshots/test_search_page.png"
         self.page.screenshot(path=screenshot_path,full_page=True)
         return title
     def new_tab_Abante_cart(self):
@@ -160,7 +160,7 @@ class Homepage:
             self.page.get_by_title("Ideal OpenSource E-commerce Solution").click()
             abante_page=page_info.value
             new_page_title=abante_page.title()
-            abante_page.screenshot(path="playwrightTesting/output/screenshots/test_abante_page.png",full_page=True)
+            abante_page.screenshot(path="reports/screenshots/test_abante_page.png",full_page=True)
 
             print(new_page_title)
             return new_page_title
@@ -169,7 +169,7 @@ class Homepage:
         with self.page.expect_popup() as page_info:
             self.page.locator("//div[@class='b_block flt_right payment']/a").click()
             abante_contribute_page=page_info.value
-            abante_contribute_page.screenshot(path="playwrightTesting/output/screenshots/test_contribute_page.png",full_page=True)
+            abante_contribute_page.screenshot(path="reports/screenshots/test_contribute_page.png",full_page=True)
             heading=abante_contribute_page.locator(".h4.heading-title").text_content()
             return heading,abante_contribute_page
     def help_with_review(self):
@@ -179,7 +179,7 @@ class Homepage:
             
             review_page=second_page_info.value
             heading2=review_page.locator("h2").first.text_content()
-            review_page.screenshot(path="playwrightTesting/output/screenshots/test_review_page.png",full_page=True)
+            review_page.screenshot(path="reports/screenshots/test_review_page.png",full_page=True)
             print(heading2)
             return heading2
         
@@ -342,13 +342,13 @@ class Homepage:
         print(header)
         return header
     
-    def header_account_link(self):
-        self.page.locator("//ul[@id='main_menu_top']/li[@data-id='menu_account']").hover()
-        time.sleep(1)
-        self.page.locator("//li[@data-id='menu_account']/ul/li/a[@class='sub menu_logout']").first.click()
-        self.page.locator("//ul[@id='main_menu_top']/li[@data-id='menu_account']").hover()
-        self.page.locator("//li[@data-id='menu_account']/ul/li/a[@class='sub menu_order']").first.click()
-        time.sleep(3)
+    # def header_account_link(self):
+    #     hover_ele=self.page.wait_for_selector("//ul[@id='main_menu_top']/li[@data-id='menu_account']")
+    #     hover_ele.hover()
+    #     self.page.locator("//li[@data-id='menu_account']/ul/li/a[@class='sub menu_logout']").first.click()
+    #     self.page.locator("//ul[@id='main_menu_top']/li[@data-id='menu_account']").hover()
+    #     self.page.locator("//li[@data-id='menu_account']/ul/li/a[@class='sub menu_order']").first.click()
+    #     time.sleep(3)
 
 
 

@@ -5,8 +5,8 @@ from playwrightTestingPractice.utils.login_register_utility import LoginRegister
 from playwrightTestingPractice.pages.homepage import Homepage
 from playwrightTestingPractice.testdata.testdata_file import login_correct_incorrect_password
 
-def test_correct_login_incorrect_password(browserInstance,click_login_register_button):
-    loginobj=Login(browserInstance)
+def test_correct_login_incorrect_password(browserInstance1,click_login_register_button):
+    loginobj=Login(browserInstance1)
     error_message=loginobj.enter_correct_login_name_incorrect_password(login_correct_incorrect_password)
     assert "Incorrect login or password provided" in error_message
 

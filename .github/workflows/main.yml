@@ -27,8 +27,22 @@ jobs:
           pip install -r requirements.txt
           playwright install
 
-      - name: Run Pytest
+      # - name: Run Pytest
+      #   run: |
+      #     cd playwrightTestingPractice
+      #     cd tests
+      #     pytest test_07_special_products.py
+
+      - name: Run Tests
         run: |
-          cd playwrightTestingPractice
-          cd tests
-          pytest test_07_special_products.py
+          pytest --alluredir=reports/allure-results
+
+      - name: Generate Allure Report
+        run: |
+          allure generate reports/allure-results -o reports/allure-report --clean
+
+      - name: Upload Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: Allure-Report
+          path: reports/allure-report/

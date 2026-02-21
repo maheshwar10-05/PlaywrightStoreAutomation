@@ -10,8 +10,8 @@ from playwrightTestingPractice.pages.special_products import SpecialProducts
 from playwrightTestingPractice.tests.test_07_special_products import test_click_Replenishing_LipColour
 
 
-def test_click_replinishing_lip(browserInstance,common_steps,login_fixture):
-    test_click_Replenishing_LipColour(browserInstance,common_steps,login_fixture)
+def test_click_replinishing_lip(browserInstance):
+    test_click_Replenishing_LipColour(browserInstance)
     special_prod=SpecialProducts(browserInstance)
     
     
