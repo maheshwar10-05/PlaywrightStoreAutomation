@@ -9,7 +9,8 @@ class Orderhistory:
 
     def validate_excel_data(self):
     # 1. Read data from Excel
-        EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+        PROJECT_ROOT = Path(__file__).resolve().parent.parent   # adjust depth if needed
+        EXCEL_PATH = PROJECT_ROOT / "test_results1.xlsx"
         workbook = openpyxl.load_workbook(EXCEL_PATH)
         sheet = workbook.active
         # Assuming cell A2 contains the expected product name
@@ -33,7 +34,8 @@ class Orderhistory:
     
     def excel_products_quantity_view(self):
          products_quan=self.page.locator("//tbody/tr[2]/td[1]")
-         EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+         PROJECT_ROOT = Path(__file__).resolve().parent.parent   # adjust depth if needed
+         EXCEL_PATH = PROJECT_ROOT / "testdata" / "test_results1.xlsx"
          workbook = openpyxl.load_workbook(EXCEL_PATH)
          sheet = workbook.active
         # Assuming cell A2 contains the expected product name
@@ -57,7 +59,8 @@ class Orderhistory:
 
 
     def export_total_excel(self):
-        EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+        PROJECT_ROOT = Path(__file__).resolve().parent.parent   # adjust depth if needed
+        EXCEL_PATH = PROJECT_ROOT / "testdata" / "test_results1.xlsx"
         df = pd.read_excel(EXCEL_PATH)
         
         # Target ONLY the price elements in the table
@@ -96,7 +99,8 @@ class Orderhistory:
 
 
     def date_export_excel(self):
-        EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+        PROJECT_ROOT = Path(__file__).resolve().parent.parent   # adjust depth if needed
+        EXCEL_PATH = PROJECT_ROOT / "testdata" / "test_results1.xlsx"
         workbook = openpyxl.load_workbook(EXCEL_PATH)
         df = pd.read_excel(EXCEL_PATH)
         number_excel_rows=len(df)
@@ -126,7 +130,8 @@ class Orderhistory:
           print("Close the Excel file and try again!")
 
     def status_excel(self):
-        EXCEL_PATH = Path.cwd() / "test_results1.xlsx"
+        PROJECT_ROOT = Path(__file__).resolve().parent.parent   # adjust depth if needed
+        EXCEL_PATH = PROJECT_ROOT / "testdata" / "test_results1.xlsx"
         workbook = openpyxl.load_workbook(EXCEL_PATH)
         df = pd.read_excel(EXCEL_PATH)
         number_excel_rows=len(df)
