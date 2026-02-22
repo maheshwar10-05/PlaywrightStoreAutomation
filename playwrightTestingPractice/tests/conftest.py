@@ -143,7 +143,7 @@ def attach_on_failure(request):
         trace_file = os.path.join(TRACE_DIR, f"{test_name}.zip")
 
         if os.path.exists(trace_file):
-            allure.attach.file(trace_file, "Playwright Trace", allure.attachment_type.ZIP)
+            allure.attach.file(trace_file, "Playwright Trace", allure.attachment_type.ZIP_ARCHIVE)
 @pytest.fixture
 def home_fixture(browserInstance):
     homepage_categories = Homepage(page=browserInstance)
