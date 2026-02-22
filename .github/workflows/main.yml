@@ -50,10 +50,10 @@ jobs:
 
       - name: Verify Allure Install
         run: allure --version
-
+        
       - name: Generate Allure Report
         if: always()
-        run: allure generate allure-results -o allure-report --clean
+        run: /opt/allure/bin/allure generate allure-results -o allure-report --clean
 
       - name: Upload Allure Report
         if: always()
