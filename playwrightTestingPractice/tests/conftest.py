@@ -134,16 +134,21 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture(autouse=True)
 def attach_on_failure(request):
     yield
-
+    TRACE_DIR1 = Path("reports/traces")
+    # If pytest hook didn't run, exit safely
     if not hasattr(request.node, "rep_call"):
         return
 
     if request.node.rep_call.failed:
         test_name = request.node.nodeid.replace("::", "_").replace("/", "_")
-        trace_file = os.path.join(TRACE_DIR, f"{test_name}.zip")
+        trace_file = TRACE_DIR1 / f"{test_name}.zip"
 
-        if os.path.exists(trace_file):
-            allure.attach.file(trace_file, "Playwright Trace", allure.attachment_type.ZIP_ARCHIVE)
+        if trace_file.exists():
+            allure.attach.file(
+                str(trace_file),
+                name="Playwright Trace",
+                attachment_type=allure.attachment_type.ZIP
+            )
 @pytest.fixture
 def home_fixture(browserInstance):
     homepage_categories = Homepage(page=browserInstance)
