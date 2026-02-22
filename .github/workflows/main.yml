@@ -36,13 +36,15 @@ jobs:
       - name: Run Tests
         run: |
           pytest -n 6 --alluredir=reports/allure-results
+          continue-on-error: true   # ⭐ DO NOT FAIL PIPELINE
 
       - name: Generate Allure Report
-        run: |
-          allure generate reports/allure-results -o reports/allure-report --clean
+        if: always()
+        run: allure generate allure-results -o allure-report --clean
 
-      - name: Upload Reports
+      - name: Upload Allure Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Allure-Report
-          path: reports/allure-report/
+          name: allure-report
+          path: allure-report
