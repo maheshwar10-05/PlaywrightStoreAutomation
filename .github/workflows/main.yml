@@ -32,9 +32,7 @@ jobs:
           cd playwrightTestingPractice
   
       #     pytest test_07_special_products.py
-      - name: Login and create auth state
-        run: |
-          python test_demo.py
+
       - name: Run Tests
         run: |
           pytest --alluredir=reports/allure-results
