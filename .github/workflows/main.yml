@@ -38,6 +38,14 @@ jobs:
           pytest -n 6 --alluredir=reports/allure-results
           continue-on-error: true   # ⭐ DO NOT FAIL PIPELINE
 
+      - name: Install Allure
+        run: |
+          sudo apt-get install default-jre -y
+          wget https://github.com/allure-framework/allure2/releases/latest/download/allure-2.29.0.tgz
+          tar -zxvf allure-2.29.0.tgz
+          sudo mv allure-2.29.0 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+
       - name: Generate Allure Report
         if: always()
         run: allure generate allure-results -o allure-report --clean
