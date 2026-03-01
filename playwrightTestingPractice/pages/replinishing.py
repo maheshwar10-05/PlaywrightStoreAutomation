@@ -1,9 +1,8 @@
-class AbsolueEye:
+from playwright.async_api import expect
+class Replinishing:
     
-    def __init__(self, page):
-        self.page = page
-        
-        # --- LOCATORS ---
+    def __init__(self,page):
+        self.page=page
         self.timeout=page.wait_for_timeout(5000)
         self.qty_input = self.page.locator("#product_quantity")
         self.total_price_label = self.page.locator("span.total-price")
@@ -12,8 +11,8 @@ class AbsolueEye:
         self.main_header = self.page.locator("span.maintext")
         self.model_number_item = self.page.locator("//div[@class='tab-content']//li[1]")
         self.brand_link = self.page.locator("//ul[@class='productinfo']//li//a")
-
-    async def input_quantity_special_absolue_eye(self):
+    
+    async def input_quantity_special_replinishing(self):
         # 1. Update Quantity
         await self.qty_input.clear()
         await self.qty_input.fill("3")
@@ -33,15 +32,15 @@ class AbsolueEye:
         int_price = float(clean_total.split("$")[1])
         
         # 4. Extract and clean Single Price (e.g., "$40.00")
-        single_price_text = await self.single_price_div.text_content()
+        single_price_text = (await self.single_price_div.text_content())
         single_float_price = float(single_price_text.strip().replace("$", ""))
         
-        print(f"The calculated total price: {int_price}")
+        print(f"The calculated total price: {clean_total}")
         print(f"The single price: {single_float_price}")
         
         return int_price, single_float_price, updated_quantity
     
-    async def click_add_cart_absolue_eye(self):
+    async def click_add_cart_replinishing(self):
         await self.add_to_cart_btn.click()
         # Await the text content of the header on the next page
         header_text = await self.main_header.text_content()
@@ -49,7 +48,7 @@ class AbsolueEye:
         print(target_page)
         return target_page
 
-    async def extract_model_number_absolue_eye(self):
+    async def extract_model_number_replinishing(self):
         model_text = await self.model_number_item.text_content()
         model_number = model_text.strip() if model_text else ""
         print(model_number)

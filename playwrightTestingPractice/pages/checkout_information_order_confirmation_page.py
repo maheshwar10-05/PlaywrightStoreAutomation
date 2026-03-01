@@ -1,110 +1,118 @@
-import re,time
+import re
+import asyncio
 import pandas as pd
+
+
 class Orderpage:
-    def __init__(self,page) -> None:
-        self.page=page    
+    def __init__(self, page):
+        self.page = page
+        
+        # --- LOCATORS ---
+        self.main_header = self.page.locator("span.maintext")
+        self.return_policy_link = self.page.get_by_role("link", name="Return Policy")
+        self.policy_paragraphs = self.page.locator("//div[@class='middle']/p")
+        self.close_btn = self.page.get_by_text("Close")
+        
+        self.edit_shipping_link = self.page.get_by_role("link", name="Edit Shipping")
+        self.edit_payment_link = self.page.get_by_role("link", name="Edit Payment")
+        self.edit_cart_link = self.page.get_by_role("link", name="Edit Cart")
+        
+        self.confirm_order_btn = self.page.get_by_text("Confirm Order", exact=True)
+        self.success_main_text = self.page.locator(".maintext")
+        
+        self.success_container = self.page.locator("section.mb40")
+        self.success_paragraphs = self.success_container.locator("p")
+        self.store_owner_link = self.page.get_by_text("store owner", exact=True)
+        
+        self.back_btn = self.page.locator("a").filter(has_text="Back")
+        self.h1_heading = self.page.locator("h1.heading1")
+        self.timeout=page.wait_for_timeout(5000)
 
-    def order_confirmation_page(self):
-        heading_oredr_confirmation=self.page.locator("span.maintext").text_content()
-        return heading_oredr_confirmation
+    # --- METHODS ---
+
+    async def order_confirmation_page(self):
+        # Replacing wait_for_selector with locator-based waiting
+        await self.main_header.first.wait_for(state="visible")
+        await self.page.wait_for_timeout(5000)
+        return await self.main_header.first.text_content()
     
-    def return_policy_popup(self):
-        self.page.get_by_role("link", name="Return Policy").first.click()
-    def pop_up_text(self):
-        policy_dict={}
-        web_ele=self.page.locator("//div[@class='middle']/p").first.text_content()
-        web_ele2=self.page.locator("//div[@class='middle']/p").last.text_content()
-        policy_dict[web_ele]=web_ele2
+    async def return_policy_popup(self):
+        await self.return_policy_link.first.click()
+
+    async def pop_up_text(self):
+        policy_dict = {}
+        # Await text content for first and last elements
+        web_ele = await self.policy_paragraphs.first.text_content()
+        web_ele2 = await self.policy_paragraphs.last.text_content()
+        
+        policy_dict[web_ele] = web_ele2
         print(policy_dict)
-        self.page.get_by_text("Close").first.click()
+        await self.close_btn.first.click()
 
-    def edit_shipping(self):
-        self.page.get_by_role("link", name="Edit Shipping").click()
-        title_target_page=self.page.locator("//span[@class='maintext']").text_content()
-        self.page.go_back()
-    
+    async def edit_shipping(self):
+        await self.timeout
+        await self.edit_shipping_link.click()
+        await self.timeout
+        title_target_page = await self.main_header.text_content()
+        await self.page.go_back()
         return title_target_page
-    def edit_payment(self):
-        self.page.get_by_role("link", name="Edit Payment").click()
-        title_target_page=self.page.locator("span.maintext").text_content()
-        self.page.go_back()
+
+    async def edit_payment(self):
+        await self.edit_payment_link.click()
+        title_target_page = await self.main_header.text_content()
+        await self.page.go_back()
         return title_target_page
-    def edit_cart(self):
-        self.page.get_by_role("link", name="Edit Cart").click()
-        page_title= self.page.locator("span.maintext").text_content()
+
+    async def edit_cart(self):
+        await self.edit_cart_link.click()
+        page_title = await self.main_header.text_content()
         return page_title
     
-    def click_confirm_order(self):
-
-        self.page.get_by_text("Confirm Order", exact=True).click()
-        time.sleep(5)
-        order_success_page=self.page.locator(".maintext")
-        order_success_page.wait_for(state="visible")
-        success=order_success_page.text_content().strip()
-        print(success)
-
-        return success
+    async def click_confirm_order(self):
+        await self.confirm_order_btn.click()
+        await self.page.wait_for_timeout(5000)
+        
+        await self.success_main_text.wait_for(state="visible")
+        success = await self.success_main_text.text_content()
+        result = success.strip() if success else ""
+        print(result)
+        return result
     
-    def order_id(self):
-        # 1. Use a more robust locator for the success message container
-        # This waits for the section to actually exist in the DOM
-        container = self.page.locator("section.mb40")
-        container.wait_for(state="visible")
+    async def order_id(self):
+        await self.success_container.wait_for(state="visible")
 
-        # 2. Extract all <p> tags inside that section
-        # We use .all() to get a list of locator objects we can iterate over
-        paragraphs = container.locator("p").all()
+        # Get all paragraph locators and iterate to extract text
+        paragraphs_locators = await self.success_paragraphs.all()
+        order_list = []
+        for p in paragraphs_locators:
+            text = await p.text_content()
+            order_list.append(text.strip() if text else "")
         
-        # 3. Clean and append to a list
-        order_list = [p.text_content().strip() for p in paragraphs]
-        
-        # Debug print to verify the list is no longer empty
         print(f"Extracted Lines: {order_list}")
 
-        # 4. Logic to click 'store owner' if it exists in the list
         for line in order_list:
             if "#" in line.lower():
-                order_id=line.split('#')
-                clean_order_id=order_id[1].removesuffix(' has been created!')
-                print(clean_order_id)
+                order_parts = line.split('#')
+                clean_order_id = order_parts[1].removesuffix(' has been created!')
+                print(f"Order ID: {clean_order_id}")
+            
             if "store owner" in line.lower():
-                # Using the page-level locator to perform the click
-                self.page.get_by_text("store owner", exact=True).click()
+                await self.store_owner_link.click()
                 break
             
-        time.sleep(4)
+        await self.page.wait_for_timeout(4000)
 
-        # 5. Wait for the new page and return the header text
-        contact_header = self.page.locator(".maintext")
-        contact_header.wait_for(state="visible")
-        print(contact_header.text_content().strip())
+        await self.success_main_text.wait_for(state="visible")
+        header_text = await self.success_main_text.text_content()
+        final_text = header_text.strip() if header_text else ""
+        print(final_text)
         
-        return contact_header.text_content().strip()
-        
-                 
-        # list1=[]
-        # list1.append({'order_id':k})
-        # df=pd.DataFrame(list1)
-        # df.to_excel("test_results1.xlsx", index=False)
+        return final_text
 
-    print("Data exported successfully!")
-
-    def click_back(self):
-        self.page.locator("a").filter(has_text="Back").first.click()
-        header=self.page.locator("h1.heading1").text_content().strip()
-        time.sleep(3)
+    async def click_back(self):
+        await self.back_btn.first.click()
+        header_raw = await self.h1_heading.text_content()
+        header = header_raw.strip() if header_raw else ""
+        await self.page.wait_for_timeout(3000)
         print(header)
         return header
-    
-
-    
-
-        
-
-    
-    
-
-                    
-
-
-

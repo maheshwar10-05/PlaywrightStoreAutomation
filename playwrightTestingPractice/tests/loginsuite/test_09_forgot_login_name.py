@@ -7,15 +7,16 @@ from playwrightTestingPractice.testdata.testdata_file import Data
 
 list1=Data().forgot_login_details()
 
+@pytest.mark.no_auth
 @pytest.mark.parametrize('user_list1',list1)
-def test_excel_data(user_list1,browserInstance1,click_login_register_button):
-    loginobj=Login(browserInstance1)
+async def test_excel_data(user_list1,browserInstance,click_login_register_button):
+    loginobj=Login(browserInstance)
     last_name=user_list1["last_name"]
     email=user_list1["email"]
 
-    error_message,success_message = loginobj.forgot_login(last_name, email)
-    logging.info(success_message)
+    error_message,success_message = await loginobj.forgot_login(last_name, email)
     logging.info(error_message)
+    logging.info(success_message)
 
     if success_message:
         assert "Success" in success_message
