@@ -12,31 +12,25 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    steps:
+ steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12.1'
+          python-version: '3.13.2'
 
       - name: Install dependencies
+        working-directory: playwrightTestingPractice
         run: |
-          cd playwrightTestingPractice
           pip install -r requirements.txt
-          playwright install
-
-      - name: Run Pytest
-        run: |
-          cd playwrightTestingPractice
-  
-      #     pytest test_07_special_products.py
+          playwright install --with-deps
 
       - name: Run Tests
-        run: |
-          pytest -n 6 --alluredir=reports/allure-results
-          continue-on-error: true   # ⭐ DO NOT FAIL PIPELINE
+        working-directory: playwrightTestingPractice
+        run: pytest -n 6 --alluredir=reports/allure-results
+        continue-on-error: true
 
       - name: Install Java
         run: sudo apt-get update && sudo apt-get install default-jre -y
