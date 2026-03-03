@@ -235,7 +235,7 @@ class Homepage:
         count = await self.brand_links.count()
         for i in range(count):
             await self.brand_links.nth(i).click()
-            await self.timeout
+            #await self.timeout
             name_brand = self.page.locator(".maintext")
             brand_list.append((await name_brand.text_content()).strip())
             await self.page.go_back()

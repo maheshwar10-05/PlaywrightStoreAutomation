@@ -112,7 +112,8 @@ async def browserInstance(browser, request):
         allure.attach.file(
             str(trace_path),
             name=f"Trace_{test_name}",
-            attachment_type=allure.attachment_type.ZIP
+            attachment_type="application/zip",
+            extension="zip"
         )
     else:
         await context.tracing.stop()

@@ -6,11 +6,12 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    - cron: '30 20 * * *'   # Runs daily at 2 AM UTC (night)
+    - cron: '30 20 * * *'
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,7 +19,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.2'
+          python-version: '3.13'
 
       - name: Install dependencies
         working-directory: playwrightTestingPractice
@@ -31,26 +32,17 @@ jobs:
         run: pytest -n 6 --alluredir=reports/allure-results
         continue-on-error: true
 
-      - name: Install Java
-        run: sudo apt-get update && sudo apt-get install default-jre -y
-
-      - name: Install Allure CLI
-        run: |
-          curl -o allure.tgz -Ls https://github.com/allure-framework/allure2/releases/latest/download/allure-2.29.0.tgz
-          tar -zxvf allure.tgz
-          sudo mv allure-2.29.0 /opt/allure
-          echo "/opt/allure/bin" >> $GITHUB_PATH
-
-      - name: Verify Allure Install
-        run: allure --version
-        
+      # 🔥 Generate Allure Report (No manual install needed)
       - name: Generate Allure Report
         if: always()
-        run: /opt/allure/bin/allure generate allure-results -o allure-report --clean
+        uses: simple-elf/allure-report-action@v1.7
+        with:
+          allure_results: playwrightTestingPractice/reports/allure-results
+          allure_report: playwrightTestingPractice/reports/allure-report
 
       - name: Upload Allure Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: allure-report
+          path: playwrightTestingPractice/reports/allure-report
