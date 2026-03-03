@@ -148,7 +148,7 @@ class Homepage:
             currency_list_actual.append(x)
         currency_list_actual_clean = [item.strip().replace("$","").strip() for item in currency_list_actual]
         await self.currency_toggle.hover()
-        await self.currency_dropdown.filter(has_text="€ Euro").click()
+        await self.currency_dropdown.filter(has_text="$ US Dollar").click()
         text = await self.page.locator("//a[@class='dropdown-toggle']/span[1]").first.text_content()
         return currency_list_actual_clean, text
     
