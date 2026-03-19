@@ -31,7 +31,7 @@ jobs:
 
       - name: Run Tests
         working-directory: playwrightTestingPractice
-        run: pytest -n 6 --alluredir=reports/allure-results --clean-alluredir
+        run: pytest -n 6 --dist=loadscope --alluredir=reports/allure-results --clean-alluredir
         continue-on-error: true
 
       # ✅ Install Java
