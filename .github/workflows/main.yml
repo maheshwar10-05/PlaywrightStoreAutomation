@@ -31,7 +31,7 @@ jobs:
 
       - name: Run Tests
         working-directory: playwrightTestingPractice
-        run: pytest -n 6 --alluredir=reports/allure-results
+        run: pytest -n 6 --alluredir=reports/allure-results --clean-alluredir
         continue-on-error: true
 
       # ✅ Install Java
@@ -50,12 +50,42 @@ jobs:
           sudo mv allure-2.29.0 /opt/allure
           sudo ln -s /opt/allure/bin/allure /usr/bin/allure
 
+      - name: Get Allure history
+        uses: actions/checkout@v4
+        with:
+            ref: gh-pages
+            path: gh-pages
+
+
+      - name: Copy Allure history
+        run: |
+          mkdir -p playwrightTestingPractice/reports/allure-results/history
+          cp -r gh-pages/history/* playwrightTestingPractice/reports/allure-results/history || true
+
       # ✅ Generate Report
       - name: Generate Allure Report
         if: always()
         run: |
           allure generate playwrightTestingPractice/reports/allure-results \
           -o playwrightTestingPractice/reports/allure-report --clean
+      - name: Save history
+        run: |
+          cp -r playwrightTestingPractice/reports/allure-report/history gh-pages/ || true
+      # ✅ Prepare final content
+      - name: Prepare GitHub Pages content
+        run: |
+          rm -rf gh-pages/*
+          cp -r playwrightTestingPractice/reports/allure-report/* gh-pages/
+
+      # ✅ Deploy
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: gh-pages
+          publish_branch: gh-pages
+
 
       - name: Upload Allure Report
         if: always()
@@ -75,14 +105,5 @@ jobs:
       - name: Disable Jekyll
         if: always()
         run: touch playwrightTestingPractice/reports/allure-report/.nojekyll
+ 
 
-      # ✅ Deploy Allure Report to GitHub Pages
-      - name: Deploy to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: playwrightTestingPractice/reports/allure-report
-          publish_branch: gh-pages
-
-          
