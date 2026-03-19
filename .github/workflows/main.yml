@@ -84,3 +84,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: playwrightTestingPractice/reports/allure-report
           publish_branch: gh-pages
+
+          
