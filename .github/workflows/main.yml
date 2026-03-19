@@ -68,3 +68,17 @@ jobs:
         with:
           name: playwright-traces
           path: playwrightTestingPractice/test-results/
+
+                # ✅ Add .nojekyll file (IMPORTANT)
+      - name: Disable Jekyll
+        if: always()
+        run: touch playwrightTestingPractice/reports/allure-report/.nojekyll
+
+      # ✅ Deploy Allure Report to GitHub Pages
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: playwrightTestingPractice/reports/allure-report
+          publish_branch: gh-pages
