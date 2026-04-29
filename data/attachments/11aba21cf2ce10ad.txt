@@ -1,0 +1,7 @@
+
+ Running as AUTHENTICATED user
+['Featured', 'Latest Products', 'Bestsellers', 'Specials', 'Brands Scrolling List']
+Product found at index: 2
+MAN Eau de Toilette Spray
+✅ PDF saved successfully: /home/runner/work/PlaywrightStoreAutomation/PlaywrightStoreAutomation/playwrightTestingPractice/reports/pdf_outputs/product_page.pdf
+{'Total Price': '$150.00'}
