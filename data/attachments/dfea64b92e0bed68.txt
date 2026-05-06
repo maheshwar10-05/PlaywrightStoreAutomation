@@ -1,0 +1,3 @@
+
+ Running as AUTHENTICATED user
+{'Skinsheen Bronzer Stick': ({'Model': '558003'}, {'Quantity': '26'}), 'Absolute Anti-Age Spot Replenishing Unifying TreatmentSPF 15': ({'Model': '108681'}, {'Quantity': '30'}), 'Absolue Eye Precious Cells': ({'Model': '427847'}, {'Quantity': '30'}), 'LE ROUGE ABSOLU Reshaping & Replenishing LipColour SPF 15': ({'Model': 'tw152236'}, {'Quantity': '31'}), 'MAN Eau de Toilette Spray': ({'Model': 'CK0010'}, {'Quantity': '124'})}

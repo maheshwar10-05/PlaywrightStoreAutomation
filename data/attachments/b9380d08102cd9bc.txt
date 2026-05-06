@@ -1,0 +1,4 @@
+
+ Running as AUTHENTICATED user
+{'Name': ['Skinsheen Bronzer Stick', 'Absolute Anti-Age Spot Replenishing Unifying TreatmentSPF 15', 'Absolue Eye Precious Cells', 'LE ROUGE ABSOLU Reshaping & Replenishing LipColour SPF 15', 'MAN Eau de Toilette Spray'], 'Model': ['558003', '108681', '427847', 'tw152236', 'CK0010']}
+Flat Shipping Rate - $2.00
