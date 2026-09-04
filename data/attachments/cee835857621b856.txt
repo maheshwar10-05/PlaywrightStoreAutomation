@@ -1,0 +1,3 @@
+INFO     root:test_09_forgot_login_name.py:18 ×
+Error: The Last name was not provided or not found in our records, please try again!
+INFO     root:test_09_forgot_login_name.py:19 None

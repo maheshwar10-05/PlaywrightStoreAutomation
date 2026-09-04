@@ -1,0 +1,3 @@
+INFO     root:test_09_forgot_login_name.py:18 ×
+Error: No records found matching information your provided, please check your information and try again!
+INFO     root:test_09_forgot_login_name.py:19 None
