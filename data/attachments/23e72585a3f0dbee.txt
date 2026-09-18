@@ -1,0 +1,3 @@
+
+ Running as AUTHENTICATED user
+Excel Path: /home/runner/work/PlaywrightStoreAutomation/PlaywrightStoreAutomation/playwrightTestingPractice/test_results1.xlsx
