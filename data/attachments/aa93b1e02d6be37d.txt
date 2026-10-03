@@ -1,0 +1,6 @@
+
+ Running as AUTHENTICATED user
+the header of the page is Absolue Eye Precious Cells
+The updated quantity is 3
+The calculated total price: 267.0
+The single price: 89.0

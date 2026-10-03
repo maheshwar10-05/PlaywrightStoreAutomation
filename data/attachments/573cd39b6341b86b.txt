@@ -1,0 +1,3 @@
+
+ Running as AUTHENTICATED user
+The number of orders with product quantity as 2: 0
