@@ -1,0 +1,4 @@
+
+ Running as AUTHENTICATED user
+['Featured', 'Latest Products', 'Bestsellers', 'Specials', 'Brands Scrolling List']
+Product found at index: 3
